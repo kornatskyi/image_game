@@ -2,14 +2,13 @@ import React, { useState, useEffect } from 'react'
 import imgArray from './components/Images'
 import { unknown } from './components/Images'
 import Field from './components/Field'
-import Timer from './components/Timer'
-
+import Timer, { timeOut } from './components/Timer'
 
 
 
 function App() {
 
-  const gameStages = ['preGame', 'remembering', 'guesing', 'result']
+  const gameStages = ['preGame', 'remembering', 'guessing', 'result']
 
   const [result, setResult] = useState(true);
 
@@ -27,13 +26,37 @@ function App() {
 
   const [timerText, setTimerTex] = useState("Timer:");
 
-  const flipedImgs = [unknown,unknown,unknown,unknown,unknown,unknown,unknown,unknown,unknown /*,unknown,unknown,unknown,unknown,unknown,unknown,unknown*/]
+  const flipedImgs = [unknown,unknown,unknown,unknown,unknown,unknown /*,unknown,unknown,unknown,unknown,unknown,unknown,unknown,unknown,unknown,unknown*/]
 
   const [gameStage, setGameStage] = useState(gameStages[0]);
 
   const [resetTimer, setResetTimer] = useState(false);
 
-  const [time, setTime] = useState(60);
+  const [time, setTime] = useState(0);
+
+  const [timeOutCust, setTimeOutCust] = useState(timeOut.a)
+
+
+
+
+
+    timeOut.registerListener(function (val) {
+    // return val;
+      // setTimeOutCust(val);
+      
+
+    setGameStage(gameStages[val])
+    setTime(15);
+    
+    setRndImg(imgArray[randomNumber(0, imgArray.length)]);
+
+    setPointerEvents('auto');
+
+    setShuffledArraiOfImg(shuffledArraiOfImg.map(img => ({ key: img.key, value: unknown.value})));
+
+    console.log("TimeOut: " + val);
+});
+
 
 
   function chooseAnswer(e) {
@@ -42,9 +65,10 @@ function App() {
     
     if(e.target.id === rndImg.key) {
       console.log("correct");
-      setTime(15);
+      setTime(5);
       setScore((s) => s + 1)
       setResetTimer(true);
+      setGameStage(gameStages[1]);
       setRndImg(imgArray[randomNumber(0, imgArray.length)]);
       setShuffledArraiOfImg(shuffle(imgArray));
     } else {
@@ -59,7 +83,7 @@ function App() {
     
     setShuffledArraiOfImg(shuffle(imgArray));
 
-    setTime(20);
+    setTime(5);
 
     setStarter(true);
 
@@ -67,9 +91,11 @@ function App() {
 
     setGameStage(() => gameStages[1]);
 
-    
+ 
+
 
   }
+
 
   const guesImmage = () => {
     
@@ -79,7 +105,7 @@ function App() {
 
     setPointerEvents('auto');
 
-    // setShuffledArraiOfImg(shuffledArraiOfImg.map(img => ({ key: img.key, value: unknown.value})));
+    setShuffledArraiOfImg(shuffledArraiOfImg.map(img => ({ key: img.key, value: unknown.value})));
 
 
 
@@ -87,24 +113,17 @@ function App() {
     setGameStage(() => gameStages[2]);
   }
 
-  useEffect(() => {
-    console.log(gameStage);
-    console.log(gameStages);
-
-  }, [gameStage])
-
-
 
   if(gameStage === gameStages[0]) {
     return  (
       <div className="container">
         <div>Game description.</div>
         <div className="find-this">
-          <img src={rndImg.value}  alt="" />
+          <img src={unknown.value}  alt="" />
         </div>
         <div>Your score: {score} </div>
-        <div><Timer resetTimer={resetTimer} time={time} timerText={timerText} starter={starter}/> </div>
-        <Field pointerEvents={pointerEvents} imgArrayProp={imgArray} /*func={chooseAnswer}*/ />
+        <div><Timer gameStage={gameStage} time={time}  timerText={timerText} starter={starter}/> </div>
+        <Field pointerEvents={pointerEvents} imgArrayProp={imgArray.map(img => ({ key: img.key, value: unknown.value}))} /*func={chooseAnswer}*/ />
         <a id="start-btn" href="/#" onClick={() => { 
           startGame();
           
@@ -115,10 +134,10 @@ function App() {
     return  (
       <div className="container">
         <div className="find-this">
-          <img src={rndImg.value}  alt="" />
+          <img src={unknown.value}  alt="" />
         </div>
         <div>Your score: {score} </div>
-        <div><Timer resetTimer={resetTimer} time={time} timerText={timerText} starter={starter}/> </div>
+        <div><Timer gameStage={gameStage} time={time} timerText={timerText} starter={starter}/> </div>
         <Field pointerEvents={pointerEvents} imgArrayProp={shuffledArraiOfImg} /*func={chooseAnswer}*/ />
           <a id="next-btn" href="/#" onClick={() => { 
           guesImmage();
@@ -135,7 +154,7 @@ function App() {
           <img src={rndImg.value}  alt="" />
         </div>
         <div>Your score: {score} </div>
-        <div><Timer resetTimer={resetTimer} time={time} timerText={timerText} starter={starter}/> </div>
+        <div><Timer gameStage={gameStage} time={time} timerText={timerText} starter={starter}/> </div>
         <Field pointerEvents={pointerEvents} imgArrayProp={shuffledArraiOfImg} func={chooseAnswer} />
         <a>Pause</a>
         </div>

@@ -1,30 +1,56 @@
 import React, { useState, useEffect } from 'react'
 
+export let timeOut = {
+    aInternal: false,
+    aListener: function (val) { },
+    set a(val) {
+        this.aInternal = val;
+        this.aListener(val);
+    },
+    get a() {
+        return this.aInternal;
+    },
+    registerListener: function (listener) {
+        this.aListener = listener;
+    }
+};
+
+
+
 export default function Timer(props) {
 
-    console.log(props.resetTimer);
 
-    const [seconds, setSeconds] = useState(15);
+
+    const [seconds, setSeconds] = useState(props.time);
+
 
     useEffect(() => {
-        if (seconds < 1) {
+        if (seconds < 1 && props.gameStage !== "preGame" && props.gameStage !== "remembering") {
+            timeOut.a = false;
             return;
-        } else if(props.resetTimer) {
-                setSeconds(props.time);
-                return;
+        }
+        if (seconds < 1 && props.gameStage === "remembering") {
+            timeOut.a = 2;
+            return;
+        }
+        if (seconds < 1 && props.gameStage === 'guessing') {
+            timeOut.a = false;
+            return;
+        }
+        if(seconds === 0) {
+            return;
         }
         const timeout = setTimeout(() => {
             setSeconds((s) => s - 1);
         }, 1000)
         return () => clearTimeout(timeout)
-    }, [seconds, props.starter])
-
+    }, [seconds])
 
     return (
-        
-            <div className="time">
-                {props.timerText} {seconds}
-            </div>
+
+        <div className="time">
+            {props.timerText} {seconds}
+        </div>
 
     );
 }

@@ -58,18 +58,18 @@ export default [
     {
         key:'peach', value: peachImg
     },
-    {
-        key:'qiwi', value: qiwiImg
-    },
+    // {
+    //     key:'qiwi', value: qiwiImg
+    // },
     // {
     //     key:'strawberry', value: strawberryImg
     // },
-    {
-        key:'watermelon', value: watermelonImg
-    },
-    {
-        key:'orange', value: orangeImg
-    }
+    // {
+    //     key:'watermelon', value: watermelonImg
+    // },
+    // {
+    //     key:'orange', value: orangeImg
+    // }
     
 ]
 
