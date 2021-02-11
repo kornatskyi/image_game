@@ -9,9 +9,9 @@ import GameStageResult from './components/GameStageResult'
 
 
 function App() {
-  const timeForGuessing = 60;
+  const timeForGuessing = 15;
 
-  const timeForRemembering = 60;
+  const timeForRemembering = 5;
 
   const gameStages = ['preGame', 'remembering', 'guessing', 'result']
 
