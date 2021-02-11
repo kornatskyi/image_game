@@ -15,7 +15,10 @@ import strawberryImg from './img/strawberry.png'
 import watermelonImg from './img/watermelon.png'
 import blackberryImg from './img/blackberry.png'
 import unknownImg from './img/unknown.png'
+import gameRules from './img/game_rules.png'
 
+
+export const gameRulesImg = gameRules;
 
 export let unknown = {
     key:'unknown', value:unknownImg

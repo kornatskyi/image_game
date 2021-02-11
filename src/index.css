@@ -35,31 +35,90 @@ code {
   left: 50%;
   display: grid;
   grid-template-columns: 100px 100px 100px;
-  grid-template-rows: 100px 100px 100px ;
+  grid-template-rows: 100px 100px ;
   gap: 10px 10px;
-  grid-template-areas:
-    ". . . "
-    ". . . "
-    ". . . ";
-
-  /* width: 430px;
-  display: grid;
-  grid-template-columns: 100px 100px 100px 100px;
-  grid-template-rows: 100px 100px 100px 100px;
-  column-gap: 10px;
-  row-gap: 10px;
-  margin:0px;
-  grid-area: Center; */
+  margin: 10px;
 }
 
 
 
-img { 
+.field  img {
+  width: 100px;
+
+}
+
+#game-rules {
+  width: 400px;
+  height: auto;
+  margin: 20px;
+}
+
+#shown-img {
   width: 100px;
 }
+
+
 
 #clear {
   width: 100px;
   height: 20px;
 
 }
+
+.flip-box-inner {
+  display:block;
+  width: 100px;
+  height: 100px;
+}
+
+
+.flip-box-front {
+  position:absolute;
+  width: max-content;
+  transform: rotateY(180deg);
+  animation-name: flip-front;
+  animation-duration: 1s;
+  animation-fill-mode: forwards;
+  opacity: 0;
+  z-index: -1;
+}
+
+.flip-box-back {
+  position:absolute;
+  animation-name: flip-back;
+  animation-duration: 1s;
+  animation-fill-mode: forwards;
+ 
+}
+
+@keyframes flip-front{
+  0% {
+    transform: rotateY(180deg);
+  }
+  50% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 100;
+    transform: rotateY(0deg);
+
+  }
+}
+
+
+@keyframes flip-back{
+  0% {
+    
+    transform: rotateY(0deg);
+  }
+  50% {
+    opacity: 0;
+  }
+  100% {
+    transform: rotateY(180deg);
+    opacity: 0;
+    
+
+  }
+}
+

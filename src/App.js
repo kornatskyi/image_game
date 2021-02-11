@@ -1,12 +1,17 @@
 import React, { useState, useEffect } from 'react'
-import imgArray from './components/Images'
-import { unknown } from './components/Images'
+import imgArray, { unknown, gameRulesImg } from './components/Images'
 import Field from './components/Field'
 import Timer, { timeOut } from './components/Timer'
-
+import GameStageStart from './components/GameStageStart'
+import GameStageRemembering from './components/GameStageRemembering'
+import GameStageAnswering from './components/GameStageAnswering'
+import GameStageResult from './components/GameStageResult'
 
 
 function App() {
+  const timeForGuessing = 60;
+
+  const timeForRemembering = 60;
 
   const gameStages = ['preGame', 'remembering', 'guessing', 'result']
 
@@ -16,9 +21,9 @@ function App() {
 
   const [rndImg, setRndImg] = useState(unknown);
 
-  const[score, setScore] = useState(0);
+  const [score, setScore] = useState(0);
 
-  const [pointerEvents, setPointerEvents] = useState('none');
+  const [pointerEvents, setPointerEvents] = useState('auto');
 
   const [shuffledArraiOfImg, setShuffledArraiOfImg] = useState(imgArray)
 
@@ -26,7 +31,7 @@ function App() {
 
   const [timerText, setTimerTex] = useState("Timer:");
 
-  const flipedImgs = [unknown,unknown,unknown,unknown,unknown,unknown /*,unknown,unknown,unknown,unknown,unknown,unknown,unknown,unknown,unknown,unknown*/]
+  const flipedImgs = [unknown, unknown, unknown, unknown, unknown, unknown /*,unknown,unknown,unknown,unknown,unknown,unknown,unknown,unknown,unknown,unknown*/]
 
   const [gameStage, setGameStage] = useState(gameStages[0]);
 
@@ -36,138 +41,112 @@ function App() {
 
   const [timeOutCust, setTimeOutCust] = useState(timeOut.a)
 
+  const [isFliped, setIsFliped] = useState(false);
 
 
 
 
-    timeOut.registerListener(function (val) {
-    // return val;
-      // setTimeOutCust(val);
-      
 
-    setGameStage(gameStages[val])
-    setTime(15);
-    
-    setRndImg(imgArray[randomNumber(0, imgArray.length)]);
-
-    setPointerEvents('auto');
-
-    setShuffledArraiOfImg(shuffledArraiOfImg.map(img => ({ key: img.key, value: unknown.value})));
-
-    console.log("TimeOut: " + val);
-});
 
 
 
   function chooseAnswer(e) {
 
     console.log(e.target.id);
-    
-    if(e.target.id === rndImg.key) {
+
+    if (e.target.id === rndImg.key) {
       console.log("correct");
-      setTime(5);
+      setTime(timeForRemembering);
       setScore((s) => s + 1)
       setResetTimer(true);
       setGameStage(gameStages[1]);
+      setIsFliped(false);
       setRndImg(imgArray[randomNumber(0, imgArray.length)]);
       setShuffledArraiOfImg(shuffle(imgArray));
     } else {
       console.log('incorrect');
       setResult(false);
-      setGameStage(3);
+      setGameStage(gameStages[3]);
     }
 
   }
 
   function startGame() {
-    
+
     setShuffledArraiOfImg(shuffle(imgArray));
 
-    setTime(5);
+    setTime(timeForRemembering);
 
     setStarter(true);
 
-    setRoundCounter((s) => s + 1)
+    setRoundCounter((s) => s + 1);
 
     setGameStage(() => gameStages[1]);
-
- 
-
-
+    setIsFliped(false);
   }
 
 
+
   const guesImmage = () => {
-    
-    setTime(15);
-    
+
+    setTime(timeForGuessing);
+
     setRndImg(imgArray[randomNumber(0, imgArray.length)]);
 
     setPointerEvents('auto');
 
-    setShuffledArraiOfImg(shuffledArraiOfImg.map(img => ({ key: img.key, value: unknown.value})));
-
-
-
+    // setShuffledArraiOfImg(shuffledArraiOfImg.map(img => ({ key: img.key, value: unknown.value })));
 
     setGameStage(() => gameStages[2]);
+    setIsFliped(true);
   }
 
+  //Function that executes if aInternal variable in this object (timeOut) changes. If it changes to value '2' then function sets GameStage to guessing.
+  timeOut.registerListener(function (val) {
 
-  if(gameStage === gameStages[0]) {
-    return  (
-      <div className="container">
-        <div>Game description.</div>
-        <div className="find-this">
-          <img src={unknown.value}  alt="" />
-        </div>
-        <div>Your score: {score} </div>
-        <div><Timer gameStage={gameStage} time={time}  timerText={timerText} starter={starter}/> </div>
-        <Field pointerEvents={pointerEvents} imgArrayProp={imgArray.map(img => ({ key: img.key, value: unknown.value}))} /*func={chooseAnswer}*/ />
-        <a id="start-btn" href="/#" onClick={() => { 
-          startGame();
-          
-          }}>Start</a>
-      </div>
+    setGameStage(gameStages[val]/*gonna be guessingStage if comes value '2'*/)
+    setTime(timeForGuessing);
+
+    setRndImg(imgArray[randomNumber(0, imgArray.length)]);
+
+    setPointerEvents('auto');
+
+    // setShuffledArraiOfImg(shuffledArraiOfImg.map(img => ({ key: img.key, value: unknown.value })));
+
+    console.log("TimeOut: " + val);
+  });
+
+
+
+
+  if (gameStage === gameStages[0]) {
+    return (
+      <GameStageStart gameRulesImg={gameRulesImg} startGame={startGame} />
     );
   } else if (gameStage === gameStages[1]) {
-    return  (
-      <div className="container">
-        <div className="find-this">
-          <img src={unknown.value}  alt="" />
-        </div>
-        <div>Your score: {score} </div>
-        <div><Timer gameStage={gameStage} time={time} timerText={timerText} starter={starter}/> </div>
-        <Field pointerEvents={pointerEvents} imgArrayProp={shuffledArraiOfImg} /*func={chooseAnswer}*/ />
-          <a id="next-btn" href="/#" onClick={() => { 
-          guesImmage();
-          }}>Show img</a>
-      </div>
-    );
-  } else if (gameStage === gameStages[2]) {
-
-    return  (
-      <div className="container">
-        {result?"": <h1>You loose</h1> }
-        <div className="find-this">
-          <p>Find this fruit.</p>
-          <img src={rndImg.value}  alt="" />
-        </div>
-        <div>Your score: {score} </div>
-        <div><Timer gameStage={gameStage} time={time} timerText={timerText} starter={starter}/> </div>
-        <Field pointerEvents={pointerEvents} imgArrayProp={shuffledArraiOfImg} func={chooseAnswer} />
-        <a>Pause</a>
-        </div>
-    );
     
+    return (
+    
+      <GameStageRemembering isFliped={isFliped} unknownValue={unknown.value} score={score} gameStage={gameStage} time={time} timerText={timerText} starter={starter} shuffledArraiOfImg={shuffledArraiOfImg} pointerEvents={pointerEvents} guesImmage={guesImmage} />
+    );
+
+  } else if (gameStage === gameStages[2]) {
+    
+
+    return (
+      <GameStageAnswering isFliped={isFliped}  rndImgValue={rndImg.value} score={score} gameStage={gameStage} time={time} timerText={timerText} starter={starter} unknownValue={unknown.value} pointerEvents={pointerEvents} shuffledArraiOfImg={shuffledArraiOfImg} chooseAnswer={chooseAnswer} />
+    );
+
   } else {
-      return <div><h1>Your result: {score}</h1></div>;
+    return (
+      <GameStageResult score={score}/>
+    );
   }
 
-    
 
 
-  
+
+
 }
 
 /**
@@ -182,9 +161,9 @@ function shuffle(a) {
   return a;
 }
 
-function randomNumber(min, max) {  
-  return Math.floor(Math.random() * (max - min) + min); 
-}  
+function randomNumber(min, max) {
+  return Math.floor(Math.random() * (max - min) + min);
+}
 
 
 
@@ -196,24 +175,3 @@ function randomNumber(min, max) {
 export default App;
 
 
-/** 
-    return  (
-      <div className="container">
-        {result?"": <h1>You loose</h1> }
-        <div className="find-this">
-          <p>Find this fruit.</p>
-          <img src={rndImg.value}  alt="" />
-        </div>
-        <div>Your score: {score} </div>
-        <div><Timer timerText={timerText} starter={starter}/> </div>
-        <Field pointerEvents={pointerEvents} imgArrayProp={shuffledArraiOfImg} func={chooseAnswer} />
-        <a id="start-btn" href="/#" onClick={() => { 
-          startGame();
-          
-          }}>Start</a>
-          <a id="next-btn" href="/#" onClick={() => { 
-          guesImmage();
-          
-          }}>Show img</a>
-      </div>
-    );*/
