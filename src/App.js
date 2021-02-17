@@ -106,6 +106,7 @@ function App() {
 
     setGameStage(gameStages[val]/*gonna be guessingStage if comes value '2'*/)
     setTime(timeForGuessing);
+    setIsFliped(true);
 
     setRndImg(imgArray[randomNumber(0, imgArray.length)]);
 
