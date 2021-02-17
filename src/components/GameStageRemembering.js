@@ -25,7 +25,7 @@ export default function GameStageRemembering(props) {
       <div>Your score: {props.score} </div>
       <div><Timer gameStage={props.gameStage} time={props.time} timerText={props.timerText} starter={props.starter} /> </div>
       <Field isFliped={props.isFliped} unknown={props.unknownValue} pointerEvents={props.pointerEvents} imgArrayProp={props.shuffledArraiOfImg} />
-      <a id="next-btn" href="/#" onClick={() => {
+      <a id="next-btn" href="###" onClick={() => {
         props.guesImmage();
       }}>Show img</a>
     </div>

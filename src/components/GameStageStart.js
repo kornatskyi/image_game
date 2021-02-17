@@ -8,7 +8,7 @@ export default function GameStageStart(props) {
 
         <div className="container">
         <img id="game-rules" src={props.gameRulesImg}/>
-        <a id="start-btn" href="/#" onClick={() => {
+        <a id="start-btn" href="###" onClick={() => {
           props.startGame();
 
         }}>Start</a>
