@@ -10,6 +10,6 @@ A small web game that trains your memory.
 Very simple rulses, you can see on the image below.
 
 
-![alt text](https://github.com/kornatskyi/image_game/blob/master/src/components/img/game_rules.png)
+![alt text](https://raw.githubusercontent.com/kornatskyi/image_game/master/src/components/img/game_rules.png)
 
 */
