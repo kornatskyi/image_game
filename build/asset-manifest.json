@@ -1,0 +1,39 @@
+{
+  "files": {
+    "main.css": "/image_game/static/css/main.975e072b.chunk.css",
+    "main.js": "/image_game/static/js/main.32b13350.chunk.js",
+    "main.js.map": "/image_game/static/js/main.32b13350.chunk.js.map",
+    "runtime-main.js": "/image_game/static/js/runtime-main.6733cfb4.js",
+    "runtime-main.js.map": "/image_game/static/js/runtime-main.6733cfb4.js.map",
+    "static/js/2.0be991e7.chunk.js": "/image_game/static/js/2.0be991e7.chunk.js",
+    "static/js/2.0be991e7.chunk.js.map": "/image_game/static/js/2.0be991e7.chunk.js.map",
+    "static/js/3.24eb32e7.chunk.js": "/image_game/static/js/3.24eb32e7.chunk.js",
+    "static/js/3.24eb32e7.chunk.js.map": "/image_game/static/js/3.24eb32e7.chunk.js.map",
+    "index.html": "/image_game/index.html",
+    "static/css/main.975e072b.chunk.css.map": "/image_game/static/css/main.975e072b.chunk.css.map",
+    "static/js/2.0be991e7.chunk.js.LICENSE.txt": "/image_game/static/js/2.0be991e7.chunk.js.LICENSE.txt",
+    "static/media/apple.f5c20d3b.png": "/image_game/static/media/apple.f5c20d3b.png",
+    "static/media/banana.faa07f6f.png": "/image_game/static/media/banana.faa07f6f.png",
+    "static/media/blackberry.402d2626.png": "/image_game/static/media/blackberry.402d2626.png",
+    "static/media/blueberry.804198a5.png": "/image_game/static/media/blueberry.804198a5.png",
+    "static/media/coconut.4938ab22.png": "/image_game/static/media/coconut.4938ab22.png",
+    "static/media/fruit1.3bcb7cc6.png": "/image_game/static/media/fruit1.3bcb7cc6.png",
+    "static/media/fruit2.94c07c17.png": "/image_game/static/media/fruit2.94c07c17.png",
+    "static/media/game_rules.6c680866.png": "/image_game/static/media/game_rules.6c680866.png",
+    "static/media/grape.fcb24d50.png": "/image_game/static/media/grape.fcb24d50.png",
+    "static/media/lemon.9e6954d0.png": "/image_game/static/media/lemon.9e6954d0.png",
+    "static/media/orange.d7d07acd.png": "/image_game/static/media/orange.d7d07acd.png",
+    "static/media/peach.68bf11b1.png": "/image_game/static/media/peach.68bf11b1.png",
+    "static/media/pear.272da0e8.png": "/image_game/static/media/pear.272da0e8.png",
+    "static/media/pineapple.65385bcb.png": "/image_game/static/media/pineapple.65385bcb.png",
+    "static/media/qiwi.c309cb43.png": "/image_game/static/media/qiwi.c309cb43.png",
+    "static/media/strawberry.6b222928.png": "/image_game/static/media/strawberry.6b222928.png",
+    "static/media/watermelon.524fb03d.png": "/image_game/static/media/watermelon.524fb03d.png"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.6733cfb4.js",
+    "static/js/2.0be991e7.chunk.js",
+    "static/css/main.975e072b.chunk.css",
+    "static/js/main.32b13350.chunk.js"
+  ]
+}

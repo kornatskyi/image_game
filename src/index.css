@@ -1,0 +1,124 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+
+
+
+.container {
+  display: flex;
+  flex-direction: column;
+}
+
+.container > * {
+  align-self: center;
+}
+
+.field {
+  width: 310px; 
+  left: 50%;
+  display: grid;
+  grid-template-columns: 100px 100px 100px;
+  grid-template-rows: 100px 100px ;
+  gap: 10px 10px;
+  margin: 10px;
+}
+
+
+
+.field  img {
+  width: 100px;
+
+}
+
+#game-rules {
+  width: 400px;
+  height: auto;
+  margin: 20px;
+}
+
+#shown-img {
+  width: 100px;
+}
+
+
+
+#clear {
+  width: 100px;
+  height: 20px;
+
+}
+
+.flip-box-inner {
+  display:block;
+  width: 100px;
+  height: 100px;
+}
+
+
+.flip-box-front {
+  position:absolute;
+  width: max-content;
+  transform: rotateY(180deg);
+  animation-name: flip-front;
+  animation-duration: 1s;
+  animation-fill-mode: forwards;
+  opacity: 0;
+  z-index: -1;
+}
+
+.flip-box-back {
+  position:absolute;
+  animation-name: flip-back;
+  animation-duration: 1s;
+  animation-fill-mode: forwards;
+ 
+}
+
+@keyframes flip-front{
+  0% {
+    transform: rotateY(180deg);
+  }
+  50% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 100;
+    transform: rotateY(0deg);
+
+  }
+}
+
+
+@keyframes flip-back{
+  0% {
+    
+    transform: rotateY(0deg);
+  }
+  50% {
+    opacity: 0;
+  }
+  100% {
+    transform: rotateY(180deg);
+    opacity: 0;
+    
+
+  }
+}
+
